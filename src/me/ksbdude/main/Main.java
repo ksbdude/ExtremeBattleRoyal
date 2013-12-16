@@ -23,11 +23,13 @@ public class Main extends JavaPlugin implements Listener{
 	}
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		Player p = (Player) sender;
-		if (sender instanceof Player){
-			//do stuff
-			if (cmd.getName().equalsIgnoreCase("CreateArena")) {
+		if (!(sender instanceof Player)){
+	    	sender.sendMessage("You must be a player!");
+		}
+		else if (cmd.getName().equalsIgnoreCase("CreateArena")) {
 				if(sender.hasPermission("plugin.sethub")) {
 					 ArenaManager.getManager().createArena(p.getLocation());//sets the arena spawn to the current player location 
+					 p.sendMessage(ChatColor.GREEN + "Arena Created!");
 				 }
 			}
 			else if(cmd.getName().equalsIgnoreCase("Join")) {
@@ -35,7 +37,7 @@ public class Main extends JavaPlugin implements Listener{
 				try{
 				    num = Integer.parseInt(args[0]);
 				}catch(NumberFormatException e){
-				    p.sendMessage("Invalid arena ID");
+				    p.sendMessage(ChatColor.RED + "Invalid arena ID");
 				}
 				ArenaManager.getManager().addPlayer(p, num);
 			}
@@ -59,7 +61,7 @@ public class Main extends JavaPlugin implements Listener{
 		    	}
 		        
 		    }
-		    if (cmd.getName().equalsIgnoreCase("pvplobby")) {
+		    if (cmd.getName().equalsIgnoreCase("pvp")) {
 		        if (getConfig().getConfigurationSection("lobby") == null) {
 		          p.sendMessage(ChatColor.RED + "The PVP lobby location not yet been set!");
 		          return true;
@@ -76,11 +78,6 @@ public class Main extends JavaPlugin implements Listener{
 		        p.teleport(l);
 		        p.sendMessage(ChatColor.GREEN + "Welcome to the PVP lobby!");
 		    }
-		    else
-		    {
-		    	sender.sendMessage("You must be a player!");
-		    }
-		}
 		return false;
 	}
 }
