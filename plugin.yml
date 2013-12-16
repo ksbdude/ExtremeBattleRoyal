@@ -1,0 +1,23 @@
+main: me.ksbdude.main.Main
+name: IPVP
+version: 0.1
+description: Crazy pvp plugin
+commands:
+    join:
+        description: joins arena
+        usage: /<command> [id]
+    createarena:
+        description: creates arena
+        usage: /<command>
+    remove:
+        description: removes arena
+        usage: /<command> [id]
+    leave:
+        description: leaves arena
+        usage: /<command>
+    pvplobby:
+        description: leaves arena
+        usage: /<command>
+    setlobby:
+        description: leaves arena
+        usage: /<command>
